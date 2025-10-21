@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- Primary Colors -->
+    <color name="primary">#2C3E50</color>
+    <color name="primary_dark">#1A252F</color>
+    <color name="primary_light">#34495E</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent">#27AE60</color>
+    <color name="accent_dark">#1E8449</color>
+    <color name="accent_light">#2ECC71</color>
+    
+    <!-- Background Colors -->
+    <color name="background">#F5F6FA</color>
+    <color name="background_dark">#ECEFF1</color>
+    <color name="surface">#FFFFFF</color>
+    
+    <!-- Game Colors -->
+    <color name="grid_background">#FFFFFF</color>
+    <color name="grid_border">#BDC3C7</color>
+    <color name="letter_text">#2C3E50</color>
+    <color name="found_word">#27AE60</color>
+    <color name="selected_word">#3498DB</color>
+    <color name="word_list_text">#34495E</color>
+    <color name="found_word_text">#95A5A6</color>
+    
+    <!-- Button Colors -->
+    <color name="button_primary">#27AE60</color>
+    <color name="button_primary_pressed">#1E8449</color>
+    <color name="button_secondary">#3498DB</color>
+    <color name="button_disabled">#BDC3C7</color>
+    
+    <!-- Text Colors -->
+    <color name="text_primary">#2C3E50</color>
+    <color name="text_secondary">#7F8C8D</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_hint">#95A5A6</color>
+    
+    <!-- Status Colors -->
+    <color name="success">#27AE60</color>
+    <color name="warning">#F39C12</color>
+    <color name="error">#E74C3C</color>
+    
+    <!-- Level Colors -->
+    <color name="level_locked">#BDC3C7</color>
+    <color name="level_unlocked">#3498DB</color>
+    <color name="level_completed">#27AE60</color>
+    
+    <!-- Overlay Colors -->
+    <color name="overlay_dark">#80000000</color>
+    <color name="overlay_light">#40FFFFFF</color>
+</resources>

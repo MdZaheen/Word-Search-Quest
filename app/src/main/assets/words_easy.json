@@ -1,0 +1,39 @@
+{
+  "levels": [
+    {
+      "level": 1,
+      "difficulty": "Easy",
+      "gridSize": 6,
+      "timeLimit": 300,
+      "words": ["CAT", "DOG", "SUN", "FUN", "RUN"]
+    },
+    {
+      "level": 2,
+      "difficulty": "Easy", 
+      "gridSize": 6,
+      "timeLimit": 300,
+      "words": ["LOVE", "HOPE", "CARE", "HELP", "PLAY"]
+    },
+    {
+      "level": 3,
+      "difficulty": "Easy",
+      "gridSize": 7,
+      "timeLimit": 360,
+      "words": ["HAPPY", "SMILE", "PEACE", "HEART", "DREAM", "LIGHT"]
+    },
+    {
+      "level": 4,
+      "difficulty": "Easy",
+      "gridSize": 7,
+      "timeLimit": 360,
+      "words": ["HOUSE", "WATER", "PHONE", "MOUSE", "PLANT", "CHAIR"]
+    },
+    {
+      "level": 5,
+      "difficulty": "Easy",
+      "gridSize": 8,
+      "timeLimit": 420,
+      "words": ["FRIEND", "SCHOOL", "FAMILY", "GARDEN", "FLOWER", "ANIMAL", "NATURE"]
+    }
+  ]
+}
