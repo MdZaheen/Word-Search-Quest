@@ -22,32 +22,36 @@
     </style>
     
     <style name="GameHeaderText">
-        <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/neon_cyan</item>
+        <item name="android:textSize">26sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif-black</item>
-        <item name="android:shadowColor">#80000000</item>
-        <item name="android:shadowDx">2</item>
-        <item name="android:shadowDy">2</item>
-        <item name="android:shadowRadius">8</item>
+        <item name="android:shadowColor">@color/neon_blue</item>
+        <item name="android:shadowDx">3</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowRadius">12</item>
     </style>
     
     <style name="GameStatsText">
-        <item name="android:textColor">@color/text_primary</item>
-        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/neon_yellow</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:shadowColor">#20000000</item>
-        <item name="android:shadowDx">1</item>
-        <item name="android:shadowDy">1</item>
-        <item name="android:shadowRadius">2</item>
+        <item name="android:shadowColor">@color/neon_orange</item>
+        <item name="android:shadowDx">2</item>
+        <item name="android:shadowDy">2</item>
+        <item name="android:shadowRadius">6</item>
     </style>
     
     <style name="GameStatsLabel">
-        <item name="android:textColor">@color/text_secondary</item>
-        <item name="android:textSize">12sp</item>
-        <item name="android:textStyle">normal</item>
-        <item name="android:fontFamily">sans-serif</item>
-        <item name="android:alpha">0.8</item>
+        <item name="android:textColor">@color/neon_pink</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:shadowColor">@color/neon_purple</item>
+        <item name="android:shadowDx">1</item>
+        <item name="android:shadowDy">1</item>
+        <item name="android:shadowRadius">4</item>
+        <item name="android:alpha">0.9</item>
     </style>
 </resources>

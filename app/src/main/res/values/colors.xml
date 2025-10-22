@@ -4,15 +4,24 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     
-    <!-- Primary Colors -->
-    <color name="primary">#2C3E50</color>
-    <color name="primary_dark">#1A252F</color>
-    <color name="primary_light">#34495E</color>
+    <!-- Primary Neon Colors -->
+    <color name="primary">#FF006E</color>
+    <color name="primary_dark">#C4065A</color>
+    <color name="primary_light">#FF1B8D</color>
     
-    <!-- Accent Colors -->
-    <color name="accent">#27AE60</color>
-    <color name="accent_dark">#1E8449</color>
-    <color name="accent_light">#2ECC71</color>
+    <!-- Neon Accent Colors -->
+    <color name="neon_purple">#8B00FF</color>
+    <color name="neon_blue">#00D4FF</color>
+    <color name="neon_orange">#FF6B35</color>
+    <color name="neon_green">#39FF14</color>
+    <color name="neon_pink">#FF073A</color>
+    <color name="neon_cyan">#00FFFF</color>
+    <color name="neon_yellow">#FFFF00</color>
+    
+    <!-- Old Accent Colors -->
+    <color name="accent">#39FF14</color>
+    <color name="accent_dark">#2ECC00</color>
+    <color name="accent_light">#66FF44</color>
     
     <!-- Background Colors -->
     <color name="background">#F5F6FA</color>
@@ -21,24 +30,24 @@
     
     <!-- Game Colors -->
     <color name="grid_background">#FFFFFF</color>
-    <color name="grid_border">#BDC3C7</color>
-    <color name="letter_text">#2C3E50</color>
-    <color name="found_word">#27AE60</color>
-    <color name="selected_word">#3498DB</color>
-    <color name="word_list_text">#34495E</color>
-    <color name="found_word_text">#95A5A6</color>
+    <color name="grid_border">#00000000</color>
+    <color name="letter_text">#1A1A1A</color>
+    <color name="found_word">#39FF14</color>
+    <color name="selected_word">#FF6B35</color>
+    <color name="word_list_text">#FFFFFF</color>
+    <color name="found_word_text">#39FF14</color>
     
     <!-- Button Colors -->
-    <color name="button_primary">#27AE60</color>
-    <color name="button_primary_pressed">#1E8449</color>
-    <color name="button_secondary">#3498DB</color>
-    <color name="button_disabled">#BDC3C7</color>
+    <color name="button_primary">#8B00FF</color>
+    <color name="button_primary_pressed">#FF006E</color>
+    <color name="button_secondary">#00D4FF</color>
+    <color name="button_disabled">#444444</color>
     
     <!-- Text Colors -->
-    <color name="text_primary">#2C3E50</color>
-    <color name="text_secondary">#7F8C8D</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#00FFFF</color>
     <color name="text_white">#FFFFFF</color>
-    <color name="text_hint">#95A5A6</color>
+    <color name="text_hint">#FF6B35</color>
     
     <!-- Status Colors -->
     <color name="success">#27AE60</color>

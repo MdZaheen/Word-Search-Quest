@@ -43,8 +43,25 @@
             android:text="Level 1"
             style="@style/GameHeaderText"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnPause"
+            app:layout_constraintEnd_toStartOf="@+id/btnHint"
             app:layout_constraintStart_toEndOf="@+id/btnBack"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Hint Button -->
+        <Button
+            android:id="@+id/btnHint"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/hint_button_background"
+            android:text="Hint (10)"
+            android:textColor="@color/text_white"
+            android:textSize="12sp"
+            android:fontFamily="sans-serif-medium"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnPause"
             app:layout_constraintTop_toTopOf="parent" />
 
         <!-- Pause Button -->
@@ -165,12 +182,10 @@
             android:background="@drawable/grid_background_transparent"
             android:elevation="6dp"
             app:layout_constraintBottom_toTopOf="@+id/recyclerWordList"
-            app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintVertical_chainStyle="packed" />
+            app:layout_constraintVertical_weight="3" />
 
         <!-- Word List -->
         <androidx.recyclerview.widget.RecyclerView
@@ -183,7 +198,7 @@
             android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_max="160dp"
+            app:layout_constraintHeight_max="120dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wordGridView" />
 
