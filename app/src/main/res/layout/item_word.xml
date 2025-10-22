@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="4dp"
-    android:background="@drawable/word_item_background"
-    android:orientation="horizontal"
-    android:padding="12dp">
+    style="@style/WordListItem"
+    android:layout_margin="6dp">
 
     <TextView
         android:id="@+id/tvWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WORD"
-        android:textColor="@color/word_list_text"
+        android:textColor="@android:color/white"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-medium" />
 
 </LinearLayout>

@@ -4,14 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -19,12 +20,16 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView tvLevelTitle, tvScore, tvTime, tvWordsFound;
     private ImageButton btnBack, btnPause;
-    private GridLayout gridLetters;
+    private WordGridView wordGridView;
     private RecyclerView recyclerWordList;
     private View layoutPauseOverlay;
     
     private LevelManager levelManager;
     private LevelManager.LevelData levelData;
+    private WordGridGenerator.GridResult gridResult;
+    private WordListAdapter wordListAdapter;
+    private List<String> foundWords;
+    
     private int currentLevel;
     private int currentScore = 0;
     private CountDownTimer gameTimer;
@@ -56,7 +61,7 @@ public class GameActivity extends AppCompatActivity {
         tvWordsFound = findViewById(R.id.tvWordsFound);
         btnBack = findViewById(R.id.btnBack);
         btnPause = findViewById(R.id.btnPause);
-        gridLetters = findViewById(R.id.gridLetters);
+        wordGridView = findViewById(R.id.wordGridView);
         recyclerWordList = findViewById(R.id.recyclerWordList);
         layoutPauseOverlay = findViewById(R.id.layoutPauseOverlay);
     }
@@ -74,64 +79,51 @@ public class GameActivity extends AppCompatActivity {
         // Set level title
         tvLevelTitle.setText("Level " + currentLevel);
         
+        // Initialize found words list
+        foundWords = new ArrayList<>();
+        
         // Initialize score and time display
         updateScoreDisplay();
         updateTimeDisplay();
         updateWordsFoundDisplay();
         
-        // TODO: Generate and display word grid
+        // Generate and display word grid
         setupWordGrid();
         
-        // TODO: Setup word list
+        // Setup word list
         setupWordList();
+        
+        // Setup grid selection listener
+        setupWordGridListener();
     }
 
     private void setupWordGrid() {
-        // Clear existing grid
-        gridLetters.removeAllViews();
+        // Generate word grid with actual words
+        gridResult = WordGridGenerator.generateGrid(levelData.words, levelData.gridSize);
         
-        // Set grid dimensions
-        gridLetters.setColumnCount(levelData.gridSize);
-        gridLetters.setRowCount(levelData.gridSize);
-        
-        // TODO: Generate actual word grid with word placement
-        // For now, create a simple grid with placeholder letters
-        for (int row = 0; row < levelData.gridSize; row++) {
-            for (int col = 0; col < levelData.gridSize; col++) {
-                TextView letterView = createLetterView((char)('A' + (row * levelData.gridSize + col) % 26));
-                gridLetters.addView(letterView);
-            }
-        }
-    }
-
-    private TextView createLetterView(char letter) {
-        TextView textView = new TextView(this);
-        
-        // Set layout parameters
-        GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-        params.width = 0;
-        params.height = 0;
-        params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
-        params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
-        params.setMargins(2, 2, 2, 2);
-        textView.setLayoutParams(params);
-        
-        // Set appearance
-        textView.setText(String.valueOf(letter));
-        textView.setTextSize(18);
-        textView.setBackgroundColor(getColor(R.color.grid_background));
-        textView.setTextColor(getColor(R.color.letter_text));
-        textView.setGravity(android.view.Gravity.CENTER);
-        textView.setPadding(4, 4, 4, 4);
-        
-        // TODO: Add touch listeners for word selection
-        
-        return textView;
+        // Set grid data to the custom view
+        wordGridView.setGridData(gridResult.grid, gridResult.wordPlacements);
     }
 
     private void setupWordList() {
-        // TODO: Create and set adapter for word list RecyclerView
+        // Create adapter for word list
+        wordListAdapter = new WordListAdapter(levelData.words, foundWords);
+        
+        // Setup RecyclerView with GridLayoutManager
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.HORIZONTAL, false);
+        recyclerWordList.setLayoutManager(layoutManager);
+        recyclerWordList.setAdapter(wordListAdapter);
+        
         updateWordsFoundDisplay();
+    }
+    
+    private void setupWordGridListener() {
+        wordGridView.setOnWordSelectedListener(new WordGridView.OnWordSelectedListener() {
+            @Override
+            public void onWordSelected(String word) {
+                onWordFound(word);
+            }
+        });
     }
 
     private void setupClickListeners() {
@@ -217,8 +209,7 @@ public class GameActivity extends AppCompatActivity {
     }
 
     private void updateWordsFoundDisplay() {
-        // TODO: Update with actual found words count
-        tvWordsFound.setText(String.format(Locale.getDefault(), "0/%d", levelData.words.size()));
+        tvWordsFound.setText(String.format(Locale.getDefault(), "%d/%d", foundWords.size(), levelData.words.size()));
     }
 
     private void addScore(int points) {
@@ -226,14 +217,26 @@ public class GameActivity extends AppCompatActivity {
         updateScoreDisplay();
     }
 
-    private void checkLevelComplete() {
-        // TODO: Check if all words are found
-        // For now, just show a toast
-        Toast.makeText(this, "Word found! +10 points", Toast.LENGTH_SHORT).show();
-        addScore(10);
-        
-        // Check if level is complete (placeholder logic)
-        // gameComplete(true);
+    private void onWordFound(String word) {
+        // Add word to found words list if not already found
+        if (!foundWords.contains(word.toUpperCase())) {
+            foundWords.add(word.toUpperCase());
+            
+            // Add score for found word
+            addScore(10);
+            
+            // Update displays
+            updateWordsFoundDisplay();
+            wordListAdapter.updateFoundWords(foundWords);
+            
+            // Show feedback
+            Toast.makeText(this, "Word found: " + word + " (+10 points)", Toast.LENGTH_SHORT).show();
+            
+            // Check if level is complete
+            if (foundWords.size() == levelData.words.size()) {
+                gameComplete(true);
+            }
+        }
     }
 
     private void gameComplete(boolean isWon) {

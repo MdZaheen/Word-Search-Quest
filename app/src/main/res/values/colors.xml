@@ -53,4 +53,7 @@
     <!-- Overlay Colors -->
     <color name="overlay_dark">#80000000</color>
     <color name="overlay_light">#40FFFFFF</color>
+    
+    <!-- UI Element Colors -->
+    <color name="magnifier_yellow">#F1C40F</color>
 </resources>

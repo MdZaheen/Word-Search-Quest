@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    android:background="@drawable/purple_gradient_background"
     tools:context=".GameActivity">
 
     <!-- Header -->
@@ -12,7 +12,7 @@
         android:id="@+id/layoutHeader"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:background="@color/primary"
+        android:background="@android:color/transparent"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/back"
             android:src="@drawable/ic_arrow_back"
-            android:tint="@color/text_white"
+            android:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -41,9 +41,7 @@
             android:layout_marginEnd="16dp"
             android:gravity="center"
             android:text="Level 1"
-            android:textColor="@color/text_white"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            style="@style/GameHeaderText"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnPause"
             app:layout_constraintStart_toEndOf="@+id/btnBack"
@@ -58,7 +56,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="@string/pause"
             android:src="@drawable/ic_pause"
-            android:tint="@color/text_white"
+            android:tint="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,10 +68,10 @@
         android:id="@+id/layoutGameInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/surface"
-        android:elevation="2dp"
+        android:background="#20FFFFFF"
+        android:elevation="4dp"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutHeader">
@@ -89,17 +87,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/score"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                style="@style/GameStatsLabel" />
 
             <TextView
                 android:id="@+id/tvScore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/GameStatsText" />
 
         </LinearLayout>
 
@@ -115,17 +110,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                style="@style/GameStatsLabel" />
 
             <TextView
                 android:id="@+id/tvTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="05:00"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/GameStatsText" />
 
         </LinearLayout>
 
@@ -141,17 +133,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/words_found"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp" />
+                style="@style/GameStatsLabel" />
 
             <TextView
                 android:id="@+id/tvWordsFound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="0/5"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/GameStatsText" />
 
         </LinearLayout>
 
@@ -161,49 +150,42 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="16dp"
+        android:layout_margin="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/layoutGameInfo">
 
         <!-- Word Grid -->
-        <FrameLayout
-            android:id="@+id/frameWordGrid"
+        <com.example.wordsearchquest.WordGridView
+            android:id="@+id/wordGridView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/grid_background"
+            android:layout_margin="4dp"
+            android:background="@drawable/grid_background_transparent"
+            android:elevation="6dp"
             app:layout_constraintBottom_toTopOf="@+id/recyclerWordList"
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintVertical_chainStyle="packed">
-
-            <!-- Grid will be populated programmatically -->
-            <GridLayout
-                android:id="@+id/gridLetters"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="8dp"
-                android:useDefaultMargins="false" />
-
-        </FrameLayout>
+            app:layout_constraintVertical_chainStyle="packed" />
 
         <!-- Word List -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerWordList"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/word_list_background"
-            android:padding="16dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/word_list_background_animated"
+            android:elevation="4dp"
+            android:padding="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_max="200dp"
+            app:layout_constraintHeight_max="160dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frameWordGrid" />
+            app:layout_constraintTop_toBottomOf="@+id/wordGridView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
