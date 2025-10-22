@@ -77,7 +77,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/your_score"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/time_taken"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="03:45"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/primary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Words Found"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <TextView
