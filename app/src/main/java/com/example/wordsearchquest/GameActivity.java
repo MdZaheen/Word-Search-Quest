@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,6 +23,7 @@ public class GameActivity extends AppCompatActivity {
 
     private TextView tvLevelTitle, tvScore, tvTime, tvWordsFound;
     private ImageButton btnBack, btnPause;
+    private Button btnHint;
     private WordGridView wordGridView;
     private RecyclerView recyclerWordList;
     private View layoutPauseOverlay;
@@ -37,6 +39,7 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer gameTimer;
     private int timeRemaining;
     private boolean isPaused = false;
+    private int hintsRemaining = 10;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +66,7 @@ public class GameActivity extends AppCompatActivity {
         tvWordsFound = findViewById(R.id.tvWordsFound);
         btnBack = findViewById(R.id.btnBack);
         btnPause = findViewById(R.id.btnPause);
+        btnHint = findViewById(R.id.btnHint);
         wordGridView = findViewById(R.id.wordGridView);
         recyclerWordList = findViewById(R.id.recyclerWordList);
         layoutPauseOverlay = findViewById(R.id.layoutPauseOverlay);
@@ -97,6 +101,9 @@ public class GameActivity extends AppCompatActivity {
         
         // Setup grid selection listener
         setupWordGridListener();
+        
+        // Initialize hint button
+        updateHintButton();
         
         // Add subtle animation to stats bar
         Animation statsAnimation = AnimationUtils.loadAnimation(this, R.anim.stats_pulse);
@@ -148,6 +155,10 @@ public class GameActivity extends AppCompatActivity {
             } else {
                 pauseGame();
             }
+        });
+        
+        btnHint.setOnClickListener(v -> {
+            useHint();
         });
 
         // Pause overlay buttons
@@ -202,6 +213,7 @@ public class GameActivity extends AppCompatActivity {
         currentScore = 0;
         timeRemaining = levelData.timeLimit;
         isPaused = false;
+        hintsRemaining = 10;
         layoutPauseOverlay.setVisibility(View.GONE);
         
         setupGame();
@@ -275,6 +287,46 @@ public class GameActivity extends AppCompatActivity {
 
     private void gameOver(boolean isWon) {
         gameComplete(isWon);
+    }
+    
+    private void useHint() {
+        if (hintsRemaining <= 0) {
+            Toast.makeText(this, "No hints remaining!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        // Find a random word that hasn't been found yet
+        List<String> unfoundWords = new ArrayList<>();
+        for (String word : levelData.words) {
+            if (!foundWords.contains(word.toUpperCase())) {
+                unfoundWords.add(word);
+            }
+        }
+        
+        if (unfoundWords.isEmpty()) {
+            Toast.makeText(this, "All words already found!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        
+        // Reveal a random unfound word
+        String hintWord = unfoundWords.get((int) (Math.random() * unfoundWords.size()));
+        onWordFound(hintWord);
+        
+        hintsRemaining--;
+        updateHintButton();
+        
+        Toast.makeText(this, "Hint used! Found: " + hintWord, Toast.LENGTH_LONG).show();
+    }
+    
+    private void updateHintButton() {
+        btnHint.setText(String.format("Hint (%d)", hintsRemaining));
+        btnHint.setEnabled(hintsRemaining > 0);
+        
+        if (hintsRemaining <= 0) {
+            btnHint.setAlpha(0.5f);
+        } else {
+            btnHint.setAlpha(1.0f);
+        }
     }
 
     @Override
