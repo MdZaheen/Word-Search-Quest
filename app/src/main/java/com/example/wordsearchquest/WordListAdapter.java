@@ -37,16 +37,29 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         String word = words.get(position);
         holder.tvWord.setText(word);
         
+        boolean wasFound = holder.itemView.isSelected();
+        boolean isFound = foundWords.contains(word);
+        
         // Change appearance based on whether word is found
-        if (foundWords.contains(word)) {
-            holder.tvWord.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.found_word_text));
+        if (isFound) {
             holder.itemView.setSelected(true);
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.found_word));
+            holder.tvWord.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), android.R.color.white));
+            
+            // Animate if newly found
+            if (!wasFound) {
+                animateFoundWord(holder.itemView);
+            }
         } else {
-            holder.tvWord.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.word_list_text));
             holder.itemView.setSelected(false);
-            holder.itemView.setBackgroundColor(ContextCompat.getColor(holder.itemView.getContext(), R.color.background_dark));
+            holder.tvWord.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), android.R.color.white));
         }
+        
+        // Add subtle fade-in animation for items
+        holder.itemView.setAlpha(0f);
+        ObjectAnimator fadeIn = ObjectAnimator.ofFloat(holder.itemView, "alpha", 0f, 1f);
+        fadeIn.setDuration(300);
+        fadeIn.setStartDelay(position * 50); // Stagger animations
+        fadeIn.start();
     }
 
     @Override
@@ -57,6 +70,30 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
     public void updateFoundWords(List<String> foundWords) {
         this.foundWords = foundWords;
         notifyDataSetChanged();
+    }
+    
+    private void animateFoundWord(View view) {
+        // Scale and fade animation
+        AnimatorSet animatorSet = new AnimatorSet();
+        
+        ObjectAnimator scaleUpX = ObjectAnimator.ofFloat(view, "scaleX", 1f, 1.2f);
+        ObjectAnimator scaleUpY = ObjectAnimator.ofFloat(view, "scaleY", 1f, 1.2f);
+        ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(view, "scaleX", 1.2f, 1f);
+        ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(view, "scaleY", 1.2f, 1f);
+        
+        scaleUpX.setDuration(200);
+        scaleUpY.setDuration(200);
+        scaleDownX.setDuration(200);
+        scaleDownY.setDuration(200);
+        
+        scaleDownX.setStartDelay(200);
+        scaleDownY.setStartDelay(200);
+        
+        animatorSet.playTogether(scaleUpX, scaleUpY);
+        animatorSet.play(scaleDownX).after(scaleUpX);
+        animatorSet.play(scaleDownY).after(scaleUpY);
+        
+        animatorSet.start();
     }
 
     static class WordViewHolder extends RecyclerView.ViewHolder {
