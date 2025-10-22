@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -95,6 +97,10 @@ public class GameActivity extends AppCompatActivity {
         
         // Setup grid selection listener
         setupWordGridListener();
+        
+        // Add subtle animation to stats bar
+        Animation statsAnimation = AnimationUtils.loadAnimation(this, R.anim.stats_pulse);
+        findViewById(R.id.layoutGameInfo).startAnimation(statsAnimation);
     }
 
     private void setupWordGrid() {
@@ -103,6 +109,10 @@ public class GameActivity extends AppCompatActivity {
         
         // Set grid data to the custom view
         wordGridView.setGridData(gridResult.grid, gridResult.wordPlacements);
+        
+        // Add entrance animation
+        Animation gridAnimation = AnimationUtils.loadAnimation(this, R.anim.grid_fade_in);
+        wordGridView.startAnimation(gridAnimation);
     }
 
     private void setupWordList() {
