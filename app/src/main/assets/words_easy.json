@@ -3,9 +3,9 @@
     {
       "level": 1,
       "difficulty": "Easy",
-      "gridSize": 6,
+      "gridSize": 8,
       "timeLimit": 300,
-      "words": ["CAT", "DOG", "SUN", "FUN", "RUN"]
+      "words": ["GUITAR", "POP", "JAZZ", "DRUM", "HARP", "MOONWALK"]
     },
     {
       "level": 2,
