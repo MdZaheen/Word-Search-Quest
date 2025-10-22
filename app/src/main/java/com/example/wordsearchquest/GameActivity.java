@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -25,13 +26,14 @@ public class GameActivity extends AppCompatActivity {
     private ImageButton btnBack, btnPause;
     private Button btnHint;
     private WordGridView wordGridView;
-    private RecyclerView recyclerWordList;
+    private RecyclerView recyclerWordList, recyclerFoundWords;
     private View layoutPauseOverlay;
     
     private LevelManager levelManager;
     private LevelManager.LevelData levelData;
     private WordGridGenerator.GridResult gridResult;
     private WordListAdapter wordListAdapter;
+    private FoundWordsAdapter foundWordsAdapter;
     private List<String> foundWords;
     
     private int currentLevel;
@@ -39,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer gameTimer;
     private int timeRemaining;
     private boolean isPaused = false;
-    private int hintsRemaining = 10;
+    private int hintsRemaining = 2;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,6 +71,7 @@ public class GameActivity extends AppCompatActivity {
         btnHint = findViewById(R.id.btnHint);
         wordGridView = findViewById(R.id.wordGridView);
         recyclerWordList = findViewById(R.id.recyclerWordList);
+        recyclerFoundWords = findViewById(R.id.recyclerFoundWords);
         layoutPauseOverlay = findViewById(R.id.layoutPauseOverlay);
     }
 
@@ -98,6 +101,9 @@ public class GameActivity extends AppCompatActivity {
         
         // Setup word list
         setupWordList();
+        
+        // Setup found words display
+        setupFoundWordsDisplay();
         
         // Setup grid selection listener
         setupWordGridListener();
@@ -132,6 +138,16 @@ public class GameActivity extends AppCompatActivity {
         recyclerWordList.setAdapter(wordListAdapter);
         
         updateWordsFoundDisplay();
+    }
+    
+    private void setupFoundWordsDisplay() {
+        // Create adapter for found words
+        foundWordsAdapter = new FoundWordsAdapter(foundWords);
+        
+        // Setup RecyclerView with LinearLayoutManager (horizontal)
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        recyclerFoundWords.setLayoutManager(layoutManager);
+        recyclerFoundWords.setAdapter(foundWordsAdapter);
     }
     
     private void setupWordGridListener() {
@@ -213,7 +229,7 @@ public class GameActivity extends AppCompatActivity {
         currentScore = 0;
         timeRemaining = levelData.timeLimit;
         isPaused = false;
-        hintsRemaining = 10;
+        hintsRemaining = 2;
         layoutPauseOverlay.setVisibility(View.GONE);
         
         setupGame();
@@ -250,6 +266,7 @@ public class GameActivity extends AppCompatActivity {
             // Update displays
             updateWordsFoundDisplay();
             wordListAdapter.updateFoundWords(foundWords);
+            foundWordsAdapter.updateFoundWords(foundWords);
             
             // Show feedback
             Toast.makeText(this, "Word found: " + word + " (+10 points)", Toast.LENGTH_SHORT).show();
@@ -308,14 +325,16 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
         
-        // Reveal a random unfound word
+        // Reveal a random unfound word with visual selection
         String hintWord = unfoundWords.get((int) (Math.random() * unfoundWords.size()));
-        onWordFound(hintWord);
+        
+        // Use auto-selection on grid
+        wordGridView.highlightWordOnGrid(hintWord);
         
         hintsRemaining--;
         updateHintButton();
         
-        Toast.makeText(this, "Hint used! Found: " + hintWord, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Hint used! Watch the grid: " + hintWord, Toast.LENGTH_LONG).show();
     }
     
     private void updateHintButton() {

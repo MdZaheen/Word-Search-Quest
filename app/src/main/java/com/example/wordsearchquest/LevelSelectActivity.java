@@ -55,15 +55,16 @@ public class LevelSelectActivity extends AppCompatActivity {
         // Set button properties
         GridLayout.LayoutParams params = new GridLayout.LayoutParams();
         params.width = 0;
-        params.height = GridLayout.LayoutParams.WRAP_CONTENT;
+        params.height = 120; // Fixed height for consistency
         params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
-        params.setMargins(8, 8, 8, 8);
+        params.setMargins(12, 12, 12, 12);
         button.setLayoutParams(params);
         
         // Set text and styling based on level status
         button.setText(String.valueOf(level));
-        button.setTextSize(16);
+        button.setTextSize(18); // Larger text for better visibility
         button.setPadding(16, 24, 16, 24);
+        button.setMinHeight(120); // Ensure minimum height
         
         if (level <= currentUnlocked) {
             // Level is unlocked
