@@ -28,6 +28,7 @@ public class WordGridView extends View {
     private List<String> foundWords;
     private List<GridCell> selectedCells;
     private List<List<GridCell>> foundWordCells;
+    private List<Paint> foundWordPaints; // Different paint for each found word
     
     private boolean isSelecting = false;
     private int startRow = -1, startCol = -1;
@@ -57,6 +58,7 @@ public class WordGridView extends View {
         foundWords = new ArrayList<>();
         selectedCells = new ArrayList<>();
         foundWordCells = new ArrayList<>();
+        foundWordPaints = new ArrayList<>();
         
         // Initialize paints
         textPaint = new Paint();
@@ -89,6 +91,7 @@ public class WordGridView extends View {
         this.wordPlacements = wordPlacements;
         this.foundWords.clear();
         this.foundWordCells.clear();
+        this.foundWordPaints.clear();
         invalidate();
     }
 
@@ -109,9 +112,11 @@ public class WordGridView extends View {
         // Draw background
         canvas.drawRect(0, 0, cellSize * gridSize, cellSize * gridSize, backgroundPaint);
         
-        // Draw found words highlighting
-        for (List<GridCell> wordCells : foundWordCells) {
-            drawWordHighlight(canvas, wordCells, foundWordPaint);
+        // Draw found words highlighting with different colors
+        for (int i = 0; i < foundWordCells.size(); i++) {
+            List<GridCell> wordCells = foundWordCells.get(i);
+            Paint paint = i < foundWordPaints.size() ? foundWordPaints.get(i) : foundWordPaint;
+            drawWordHighlight(canvas, wordCells, paint);
         }
         
         // Draw current selection
@@ -140,10 +145,44 @@ public class WordGridView extends View {
     private void drawWordHighlight(Canvas canvas, List<GridCell> cells, Paint paint) {
         if (cells.isEmpty()) return;
         
-        for (GridCell cell : cells) {
-            float x = cell.col * cellSize;
-            float y = cell.row * cellSize;
-            canvas.drawRect(x + 4, y + 4, x + cellSize - 4, y + cellSize - 4, paint);
+        // Check if selection is horizontal, vertical, or diagonal
+        boolean isHorizontal = cells.size() > 1 && cells.get(0).row == cells.get(cells.size() - 1).row;
+        boolean isVertical = cells.size() > 1 && cells.get(0).col == cells.get(cells.size() - 1).col;
+        
+        if (isHorizontal || isVertical || cells.size() == 1) {
+            // Draw a single continuous rounded rectangle for straight lines
+            int minRow = Integer.MAX_VALUE, maxRow = Integer.MIN_VALUE;
+            int minCol = Integer.MAX_VALUE, maxCol = Integer.MIN_VALUE;
+            
+            for (GridCell cell : cells) {
+                minRow = Math.min(minRow, cell.row);
+                maxRow = Math.max(maxRow, cell.row);
+                minCol = Math.min(minCol, cell.col);
+                maxCol = Math.max(maxCol, cell.col);
+            }
+            
+            float left = minCol * cellSize + 6;
+            float top = minRow * cellSize + 6;
+            float right = (maxCol + 1) * cellSize - 6;
+            float bottom = (maxRow + 1) * cellSize - 6;
+            float cornerRadius = 12f;
+            
+            Path path = new Path();
+            path.addRoundRect(left, top, right, bottom, cornerRadius, cornerRadius, Path.Direction.CW);
+            canvas.drawPath(path, paint);
+        } else {
+            // For diagonal selections, draw individual rounded rectangles for each cell
+            float cornerRadius = 8f;
+            for (GridCell cell : cells) {
+                float left = cell.col * cellSize + 6;
+                float top = cell.row * cellSize + 6;
+                float right = (cell.col + 1) * cellSize - 6;
+                float bottom = (cell.row + 1) * cellSize - 6;
+                
+                Path cellPath = new Path();
+                cellPath.addRoundRect(left, top, right, bottom, cornerRadius, cornerRadius, Path.Direction.CW);
+                canvas.drawPath(cellPath, paint);
+            }
         }
     }
 
@@ -280,6 +319,10 @@ public class WordGridView extends View {
         if (!foundWords.contains(word.toUpperCase())) {
             foundWords.add(word.toUpperCase());
             
+            // Create a unique color paint for this word
+            Paint wordPaint = createColoredPaint(foundWords.size() - 1);
+            foundWordPaints.add(wordPaint);
+            
             // Find the word placement and add cells to found words
             for (WordGridGenerator.WordPlacement placement : wordPlacements) {
                 if (placement.word.equalsIgnoreCase(word)) {
@@ -318,6 +361,55 @@ public class WordGridView extends View {
 
     public boolean isAllWordsFound() {
         return foundWords.size() == wordPlacements.size();
+    }
+    
+    private Paint createColoredPaint(int wordIndex) {
+        // Array of vibrant colors for found words
+        int[] colors = {
+            0xCC39FF14, // Neon Green
+            0xCC00D4FF, // Neon Blue  
+            0xCCFF073A, // Neon Pink
+            0xCCFFFF00, // Neon Yellow
+            0xCC8B00FF, // Neon Purple
+            0xCCFF6B35, // Neon Orange
+            0xCC00FFFF, // Neon Cyan
+            0xCCFF1493, // Deep Pink
+            0xCC32CD32, // Lime Green
+            0xCC1E90FF  // Dodger Blue
+        };
+        
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(colors[wordIndex % colors.length]);
+        paint.setAlpha(180); // Semi-transparent
+        return paint;
+    }
+    
+    public void highlightWordOnGrid(String word) {
+        if (wordPlacements == null) return;
+        
+        for (WordGridGenerator.WordPlacement placement : wordPlacements) {
+            if (placement.word.equalsIgnoreCase(word)) {
+                // Get the word cells
+                List<GridCell> wordCells = getWordCells(placement);
+                
+                // Temporarily show selection
+                selectedCells = new ArrayList<>(wordCells);
+                invalidate();
+                
+                // Auto-select the word after a brief delay
+                postDelayed(() -> {
+                    markWordAsFound(word);
+                    selectedCells.clear();
+                    invalidate();
+                    if (listener != null) {
+                        listener.onWordSelected(word);
+                    }
+                }, 1000); // 1 second delay to show the selection
+                
+                break;
+            }
+        }
     }
 
     private static class GridCell {

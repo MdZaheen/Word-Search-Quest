@@ -44,6 +44,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         if (isFound) {
             holder.itemView.setSelected(true);
             holder.tvWord.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), android.R.color.white));
+            // Fade found words to 50% opacity
+            holder.itemView.setAlpha(0.5f);
             
             // Animate if newly found
             if (!wasFound) {
@@ -52,6 +54,8 @@ public class WordListAdapter extends RecyclerView.Adapter<WordListAdapter.WordVi
         } else {
             holder.itemView.setSelected(false);
             holder.tvWord.setTextColor(ContextCompat.getColor(holder.itemView.getContext(), android.R.color.white));
+            // Full opacity for unfound words
+            holder.itemView.setAlpha(1.0f);
         }
         
         // Add subtle fade-in animation for items
