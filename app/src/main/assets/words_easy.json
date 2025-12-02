@@ -4,14 +4,14 @@
       "level": 1,
       "difficulty": "Easy",
       "gridSize": 8,
-      "timeLimit": 300,
+      "timeLimit": 120,
       "words": ["GUITAR", "POP", "JAZZ", "DRUM", "HARP", "MOONWALK"]
     },
     {
       "level": 2,
       "difficulty": "Easy", 
       "gridSize": 6,
-      "timeLimit": 300,
+      "timeLimit": 120,
       "words": ["LOVE", "HOPE", "CARE", "HELP", "PLAY"]
     },
     {
