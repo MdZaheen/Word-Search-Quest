@@ -5,35 +5,70 @@
       "difficulty": "Easy",
       "gridSize": 8,
       "timeLimit": 120,
-      "words": ["GUITAR", "POP", "JAZZ", "DRUM", "HARP", "MOONWALK"]
+      "words": [
+        "GUITAR",
+        "POP",
+        "JAZZ",
+        "DRUM",
+        "HARP",
+        "MOONWALK"
+      ]
     },
     {
       "level": 2,
-      "difficulty": "Easy", 
+      "difficulty": "Easy",
       "gridSize": 6,
       "timeLimit": 120,
-      "words": ["LOVE", "HOPE", "CARE", "HELP", "PLAY"]
+      "words": [
+        "LOVE",
+        "HOPE",
+        "CARE",
+        "HELP",
+        "PLAY"
+      ]
     },
     {
       "level": 3,
       "difficulty": "Easy",
       "gridSize": 7,
-      "timeLimit": 360,
-      "words": ["HAPPY", "SMILE", "PEACE", "HEART", "DREAM", "LIGHT"]
+      "timeLimit": 120,
+      "words": [
+        "HAPPY",
+        "SMILE",
+        "PEACE",
+        "HEART",
+        "DREAM",
+        "LIGHT"
+      ]
     },
     {
       "level": 4,
       "difficulty": "Easy",
       "gridSize": 7,
-      "timeLimit": 360,
-      "words": ["HOUSE", "WATER", "PHONE", "MOUSE", "PLANT", "CHAIR"]
+      "timeLimit": 120,
+      "words": [
+        "HOUSE",
+        "WATER",
+        "PHONE",
+        "MOUSE",
+        "PLANT",
+        "CHAIR"
+      ]
     },
     {
       "level": 5,
       "difficulty": "Easy",
       "gridSize": 8,
-      "timeLimit": 420,
-      "words": ["FRIEND", "SCHOOL", "FAMILY", "GARDEN", "FLOWER", "ANIMAL", "NATURE"]
+      "timeLimit": 120,
+      "words": [
+        "FRIEND",
+        "SCHOOL",
+        "FAMILY",
+        "GARDEN",
+        "FLOWER",
+        "ANIMAL",
+        "NATURE"
+      ]
     }
   ]
 }
