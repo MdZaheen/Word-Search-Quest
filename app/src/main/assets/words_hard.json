@@ -4,36 +4,92 @@
       "level": 11,
       "difficulty": "Hard",
       "gridSize": 11,
-      "timeLimit": 600,
-      "words": ["PHENOMENAL", "TREMENDOUS", "INCREDIBLE", "MARVELOUS", "SPECTACULAR", "OUTSTANDING", "EXTRAORDINARY", "MAGNIFICENT", "EXCEPTIONAL", "BREATHTAKING"]
+      "timeLimit": 240,
+      "words": [
+        "PHENOMENAL",
+        "TREMENDOUS",
+        "INCREDIBLE",
+        "MARVELOUS",
+        "SPECTACULAR",
+        "OUTSTANDING",
+        "EXTRAORDINARY",
+        "MAGNIFICENT",
+        "EXCEPTIONAL",
+        "BREATHTAKING"
+      ]
     },
     {
       "level": 12,
       "difficulty": "Hard",
       "gridSize": 11,
-      "timeLimit": 600,
-      "words": ["TECHNOLOGY", "ARCHITECTURE", "MASTERPIECE", "VOCABULARY", "ENCYCLOPEDIA", "PHOTOGRAPHY", "BIBLIOGRAPHY", "PSYCHOLOGY", "PHILOSOPHY", "ASTRONOMY"]
+      "timeLimit": 240,
+      "words": [
+        "TECHNOLOGY",
+        "ARCHITECTURE",
+        "MASTERPIECE",
+        "VOCABULARY",
+        "ENCYCLOPEDIA",
+        "PHOTOGRAPHY",
+        "BIBLIOGRAPHY",
+        "PSYCHOLOGY",
+        "PHILOSOPHY",
+        "ASTRONOMY"
+      ]
     },
     {
       "level": 13,
       "difficulty": "Hard",
       "gridSize": 12,
-      "timeLimit": 660,
-      "words": ["UNDERSTANDING", "INTERNATIONAL", "RESPONSIBILITY", "COMMUNICATION", "TRANSFORMATION", "COLLABORATION", "CONCENTRATION", "INVESTIGATION", "RECOMMENDATION", "CHARACTERIZATION"]
+      "timeLimit": 240,
+      "words": [
+        "UNDERSTANDING",
+        "INTERNATIONAL",
+        "RESPONSIBILITY",
+        "COMMUNICATION",
+        "TRANSFORMATION",
+        "COLLABORATION",
+        "CONCENTRATION",
+        "INVESTIGATION",
+        "RECOMMENDATION",
+        "CHARACTERIZATION"
+      ]
     },
     {
       "level": 14,
       "difficulty": "Hard",
       "gridSize": 12,
-      "timeLimit": 660,
-      "words": ["REFRIGERATOR", "ENTREPRENEUR", "KINDERGARTEN", "KALEIDOSCOPE", "ROLLERCOASTER", "SUPERCOMPUTER", "SKATEBOARDING", "THOROUGHBRED", "XYLOPHONE", "CHEESEBURGER", "QUARTERBACK"]
+      "timeLimit": 240,
+      "words": [
+        "REFRIGERATOR",
+        "ENTREPRENEUR",
+        "KINDERGARTEN",
+        "KALEIDOSCOPE",
+        "ROLLERCOASTER",
+        "SUPERCOMPUTER",
+        "SKATEBOARDING",
+        "THOROUGHBRED",
+        "XYLOPHONE",
+        "CHEESEBURGER",
+        "QUARTERBACK"
+      ]
     },
     {
       "level": 15,
       "difficulty": "Hard",
       "gridSize": 12,
-      "timeLimit": 720,
-      "words": ["REVOLUTIONARY", "EXTRAORDINARY", "INTERNATIONALLY", "CONSTITUTIONALLY", "CHARACTERISTICALLY", "UNCHARACTERISTICALLY", "INCOMPREHENSIBLY", "DISPROPORTIONATELY", "MULTIDIMENSIONAL", "INTERDISCIPLINARY"]
+      "timeLimit": 240,
+      "words": [
+        "REVOLUTIONARY",
+        "EXTRAORDINARY",
+        "INTERNATIONALLY",
+        "CONSTITUTIONALLY",
+        "CHARACTERISTICALLY",
+        "UNCHARACTERISTICALLY",
+        "INCOMPREHENSIBLY",
+        "DISPROPORTIONATELY",
+        "MULTIDIMENSIONAL",
+        "INTERDISCIPLINARY"
+      ]
     }
   ]
 }
