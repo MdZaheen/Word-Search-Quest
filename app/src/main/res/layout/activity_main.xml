@@ -106,6 +106,22 @@
 
     </LinearLayout>
 
+    <!-- Credits -->
+    <TextView
+        android:id="@+id/tvCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="Name : Mohammed Zaheen \nUSN : 1DS24IS407\nName : Prajwal S B\nUSN : 1DS24IS 410\nBranch : Information Science &amp; Enginnering\nCollege : Dayananda Sagar College of Enginnering"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/tvVersion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutMenuButtons" />
+
     <!-- Version Info -->
     <TextView
         android:id="@+id/tvVersion"
