@@ -296,7 +296,7 @@ public class GameActivity extends AppCompatActivity {
         intent.putExtra("score", currentScore);
         intent.putExtra("timeRemaining", timeRemaining);
         intent.putExtra("isWon", isWon);
-        intent.putExtra("wordsFound", 0); // TODO: Pass actual words found count
+        intent.putExtra("wordsFound", foundWords.size());
         intent.putExtra("totalWords", levelData.words.size());
         startActivity(intent);
         finish();
