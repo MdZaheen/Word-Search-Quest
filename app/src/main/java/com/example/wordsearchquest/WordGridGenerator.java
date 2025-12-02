@@ -72,6 +72,12 @@ public class WordGridGenerator {
             }
         }
         
+        // Track direction usage
+        java.util.Map<Direction, Integer> directionUsage = new java.util.HashMap<>();
+        for (Direction d : Direction.values()) {
+            directionUsage.put(d, 0);
+        }
+        
         // Place words in the grid
         // Sort words by length (longest first) to improve placement success
         List<String> sortedWords = new ArrayList<>(words);
@@ -79,9 +85,14 @@ public class WordGridGenerator {
         
         for (String word : sortedWords) {
             if (word.length() <= gridSize) {
-                WordPlacement placement = placeWordInGrid(grid, word, gridSize);
+                // Prioritize least used directions
+                List<Direction> prioritizedDirections = new ArrayList<>(java.util.Arrays.asList(Direction.values()));
+                prioritizedDirections.sort((d1, d2) -> Integer.compare(directionUsage.get(d1), directionUsage.get(d2)));
+                
+                WordPlacement placement = placeWordInGrid(grid, word, gridSize, prioritizedDirections);
                 if (placement != null) {
                     wordPlacements.add(placement);
+                    directionUsage.put(placement.direction, directionUsage.get(placement.direction) + 1);
                 }
             }
         }
@@ -92,24 +103,24 @@ public class WordGridGenerator {
         return new GridResult(grid, wordPlacements);
     }
     
-    private static WordPlacement placeWordInGrid(char[][] grid, String word, int gridSize) {
-        int maxAttempts = 500; // Increased attempts
-        Direction[] directions = Direction.values();
+    private static WordPlacement placeWordInGrid(char[][] grid, String word, int gridSize, List<Direction> prioritizedDirections) {
+        int attemptsPerDirection = 50; 
         
-        for (int attempt = 0; attempt < maxAttempts; attempt++) {
-            Direction direction = directions[random.nextInt(directions.length)];
-            
-            int[] start = getRandomStartPosition(word, gridSize, direction);
-            if (start == null) continue;
-            
-            int startRow = start[0];
-            int startCol = start[1];
-            
-            if (canPlaceWord(grid, word, startRow, startCol, direction)) {
-                placeWord(grid, word, startRow, startCol, direction);
+        // Try directions in order of priority (least used first)
+        for (Direction direction : prioritizedDirections) {
+            for (int attempt = 0; attempt < attemptsPerDirection; attempt++) {
+                int[] start = getRandomStartPosition(word, gridSize, direction);
+                if (start == null) continue;
                 
-                int[] end = getEndPosition(startRow, startCol, word.length() - 1, direction);
-                return new WordPlacement(word, startRow, startCol, end[0], end[1], direction);
+                int startRow = start[0];
+                int startCol = start[1];
+                
+                if (canPlaceWord(grid, word, startRow, startCol, direction)) {
+                    placeWord(grid, word, startRow, startCol, direction);
+                    
+                    int[] end = getEndPosition(startRow, startCol, word.length() - 1, direction);
+                    return new WordPlacement(word, startRow, startCol, end[0], end[1], direction);
+                }
             }
         }
         
