@@ -41,6 +41,27 @@ public class WordGridGenerator {
     private static final Random random = new Random();
     
     public static GridResult generateGrid(List<String> words, int gridSize) {
+        GridResult bestResult = null;
+        int maxGridAttempts = 10;
+        
+        for (int attempt = 0; attempt < maxGridAttempts; attempt++) {
+            GridResult result = tryGenerateGrid(words, gridSize);
+            
+            // If all words placed, return immediately
+            if (result.wordPlacements.size() == words.size()) {
+                return result;
+            }
+            
+            // Keep track of the best result (most words placed)
+            if (bestResult == null || result.wordPlacements.size() > bestResult.wordPlacements.size()) {
+                bestResult = result;
+            }
+        }
+        
+        return bestResult;
+    }
+
+    private static GridResult tryGenerateGrid(List<String> words, int gridSize) {
         char[][] grid = new char[gridSize][gridSize];
         List<WordPlacement> wordPlacements = new ArrayList<>();
         
@@ -52,7 +73,11 @@ public class WordGridGenerator {
         }
         
         // Place words in the grid
-        for (String word : words) {
+        // Sort words by length (longest first) to improve placement success
+        List<String> sortedWords = new ArrayList<>(words);
+        sortedWords.sort((s1, s2) -> Integer.compare(s2.length(), s1.length()));
+        
+        for (String word : sortedWords) {
             if (word.length() <= gridSize) {
                 WordPlacement placement = placeWordInGrid(grid, word, gridSize);
                 if (placement != null) {
@@ -68,7 +93,7 @@ public class WordGridGenerator {
     }
     
     private static WordPlacement placeWordInGrid(char[][] grid, String word, int gridSize) {
-        int maxAttempts = 100;
+        int maxAttempts = 500; // Increased attempts
         Direction[] directions = Direction.values();
         
         for (int attempt = 0; attempt < maxAttempts; attempt++) {
