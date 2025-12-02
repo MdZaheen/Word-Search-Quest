@@ -3,6 +3,7 @@
     <style name="Base.Theme.WordSearchQuest" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
 
     <style name="Theme.WordSearchQuest" parent="Base.Theme.WordSearchQuest" />
