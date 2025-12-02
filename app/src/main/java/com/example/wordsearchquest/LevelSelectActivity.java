@@ -70,10 +70,12 @@ public class LevelSelectActivity extends AppCompatActivity {
             // Level is unlocked
             if (levelManager.isLevelCompleted(level)) {
                 // Level is completed
+                button.setBackgroundResource(R.drawable.bg_level_item);
                 button.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.level_completed));
                 button.setTextColor(ContextCompat.getColor(this, R.color.text_white));
             } else {
                 // Level is available but not completed
+                button.setBackgroundResource(R.drawable.bg_level_item);
                 button.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.level_unlocked));
                 button.setTextColor(ContextCompat.getColor(this, R.color.text_white));
             }
@@ -84,6 +86,7 @@ public class LevelSelectActivity extends AppCompatActivity {
             
         } else {
             // Level is locked
+            button.setBackgroundResource(R.drawable.bg_level_item);
             button.setBackgroundTintList(ContextCompat.getColorStateList(this, R.color.level_locked));
             button.setTextColor(ContextCompat.getColor(this, R.color.text_secondary));
             button.setEnabled(false);
