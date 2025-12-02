@@ -4,36 +4,82 @@
       "level": 6,
       "difficulty": "Medium",
       "gridSize": 8,
-      "timeLimit": 420,
-      "words": ["JOURNEY", "VICTORY", "COURAGE", "FREEDOM", "DIAMOND", "CRYSTAL", "RAINBOW"]
+      "timeLimit": 180,
+      "words": [
+        "JOURNEY",
+        "VICTORY",
+        "COURAGE",
+        "FREEDOM",
+        "DIAMOND",
+        "CRYSTAL",
+        "RAINBOW"
+      ]
     },
     {
       "level": 7,
       "difficulty": "Medium",
       "gridSize": 9,
-      "timeLimit": 480,
-      "words": ["MOUNTAIN", "ELEPHANT", "COMPUTER", "LANGUAGE", "SANDWICH", "BUTTERFLY", "SUNSHINE", "BIRTHDAY"]
+      "timeLimit": 180,
+      "words": [
+        "MOUNTAIN",
+        "ELEPHANT",
+        "COMPUTER",
+        "LANGUAGE",
+        "SANDWICH",
+        "BUTTERFLY",
+        "SUNSHINE",
+        "BIRTHDAY"
+      ]
     },
     {
       "level": 8,
       "difficulty": "Medium",
       "gridSize": 9,
-      "timeLimit": 480,
-      "words": ["CHAMPION", "TREASURE", "UNIVERSE", "MAGAZINE", "PINEAPPLE", "ADVENTURE", "CHOCOLATE", "TELEPHONE"]
+      "timeLimit": 180,
+      "words": [
+        "CHAMPION",
+        "TREASURE",
+        "UNIVERSE",
+        "MAGAZINE",
+        "PINEAPPLE",
+        "ADVENTURE",
+        "CHOCOLATE",
+        "TELEPHONE"
+      ]
     },
     {
       "level": 9,
       "difficulty": "Medium",
       "gridSize": 10,
-      "timeLimit": 540,
-      "words": ["WONDERFUL", "EDUCATION", "CELEBRATE", "KNOWLEDGE", "COMMUNITY", "CHALLENGE", "HAPPINESS", "DISCOVERY", "BEAUTIFUL"]
+      "timeLimit": 180,
+      "words": [
+        "WONDERFUL",
+        "EDUCATION",
+        "CELEBRATE",
+        "KNOWLEDGE",
+        "COMMUNITY",
+        "CHALLENGE",
+        "HAPPINESS",
+        "DISCOVERY",
+        "BEAUTIFUL"
+      ]
     },
     {
       "level": 10,
       "difficulty": "Medium",
       "gridSize": 10,
-      "timeLimit": 540,
-      "words": ["BASKETBALL", "SMARTPHONE", "WATERMELON", "PLAYGROUND", "RESTAURANT", "HELICOPTER", "PHOTOGRAPH", "TOOTHBRUSH", "STRAWBERRY"]
+      "timeLimit": 180,
+      "words": [
+        "BASKETBALL",
+        "SMARTPHONE",
+        "WATERMELON",
+        "PLAYGROUND",
+        "RESTAURANT",
+        "HELICOPTER",
+        "PHOTOGRAPH",
+        "TOOTHBRUSH",
+        "STRAWBERRY"
+      ]
     }
   ]
 }
